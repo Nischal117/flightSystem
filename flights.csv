@@ -1,0 +1,9 @@
+FlightID,Airline,Origin,Destination,DepartureTime,Duration,Price
+DL100,Delta,RIA,GIA,8:00,300,700.0
+AA100,American,AIA,NIA,9:20,400,900.0
+BA100,British,RIA,BIA,10:40,250,750.0
+LH100,Lufthansa,NIA,AIA,16:00,180,620.0
+AA101,American,RIA,GIA,7:50,150,540.0
+DL101,Delta,NIA,AIA,20:00,230,990.0
+LH101,Lufthansa,AIA,NIA,10:40,300,900.0
+BA101,British,RIA,BIA,15:40,120,490.0

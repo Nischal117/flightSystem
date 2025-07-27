@@ -78,6 +78,20 @@ int main() {
                if (hasUserAccess) {
                // Book a Flight: Airport selection (placeholder)
                // Assume airports.csv exists with format: AirportID,Name
+
+  vector<string> userPanel = {"Book a Flight" , "See Your Flight" , "Delete bookings"};
+    Menu userMind(userPanel , 12 , 50);
+    int getuser = userMind.display();
+
+        if(getuser == -1)
+        {
+            break;
+        }
+
+        else if(getuser == 0)  {
+
+
+
                 Database db;
                 db.loadAirports();
                 Menu originMenu(db.getAirportNames(), 12, 50);
@@ -201,11 +215,30 @@ else
 
 
 
-
-
   
-                    }
-                } else if (passChoice == 1) { // Admin
+          }
+
+          else if(getuser == 1)
+          {
+            continue;
+          }
+          else if(getuser == 2)
+          {
+            continue;
+          }
+        else 
+        {
+            break;
+        }
+
+
+}
+
+
+   }
+
+
+                else if (passChoice == 1) { // Admin
                     goto adminLogIn;
                 } else if (passChoice == 2) { // Cancel
                     continue;

@@ -95,6 +95,7 @@ int main() {
                             break; // Cancel
                         }
 
+               
                         // Placeholder for flight selection
                         clear();
                         refresh();
@@ -137,7 +138,7 @@ string dest = db.getAirportID(destIndex);
     
 
 
-   vector<Database::Flight> foundFlight = db.getFlights(shortOrigin , shortDest);
+  vector<Database::Flight> foundFlight = db.getFlights(shortOrigin , shortDest);
     
     if(foundFlight.empty())
             {
@@ -170,26 +171,39 @@ for (size_t i = 0; i < foundFlight.size(); ++i) {
     bookNow.dest = dest; // e.g., "LAX"
     bookNow.departureTime  = foundFlight[flightIndex].departureTime;
 
+    if (db.userBook(&bookNow))
+    {
+    bookNow.bookingId = db.generateBookingID();
+    
+    int totalBaggageCost = 0;
+    if(bookNow.baggage > 1) 
+    { 
+        totalBaggageCost = bookNow.baggage * 25;
+    }
+
+    bookNow.cost = (foundFlight[flightIndex].price) + totalBaggageCost;
+    
+    db.saveBooking(bookNow); // Assuming saveBooking is implemented
+    
+    Menu successMenu({"Booking successful! Press Enter to continue."}, 12, 50);
+    
+    successMenu.display();
+    } 
+else 
+    {
+    Menu cancelMenu({"Booking cancelled. Press Enter to continue."}, 12, 50);
+    cancelMenu.display();
+    continue;
+    }
+    
 
 
-        vector<string> bookOption = {"Enter Name : " , "Sex : " , "BaggageNumber : " , "Meal Preference(Non-Veg/Veg) : "};
-
-        Menu bookingMenu(bookOption , 12 , 50);
-        
-
-        string Name = bookingMenu.inputField(0,"");
-        string Sex = bookingMenu.inputField(1,"");
-        int baggageNum = std::stoi(bookingMenu.inputField(2,""));
-        string meal = bookingMenu.inputField(3,"");
-
-        bookNow.name = Name;
-        bookNow.baggage = baggageNum;
-        bookNow.mealPreference = meal;
-        bookNow.sex = Sex;
 
 
 
 
+
+  
                     }
                 } else if (passChoice == 1) { // Admin
                     goto adminLogIn;

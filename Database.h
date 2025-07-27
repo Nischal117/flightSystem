@@ -9,6 +9,8 @@
 #include<iomanip>
 #include<vector>
 #include<string>
+#include<ncurses.h>
+
 
 using std::string;
 using std::vector;
@@ -38,21 +40,22 @@ public:
     };
 
     struct Booking {
-    string bookingId;
+    string bookingId;       //unique id for every booking to later dlt the row
 //    string userId;
-    string name;
-    string flightId;
-    string airline;
-    string origin;
-    string dest;
-    int duration;
-    string departureTime;
-    string bookingDate;
-    string sex;
-    string gmail;
-    int baggage;
-    string mealPreference;
-    float cost;
+    string name;           //Customer Name          -> taking userInput(U)
+    string flightId;       //flight Number Id       -> saved in flights.csv
+    string airline;        //airline name           -> saved in flights.csv
+    string origin;         //departure location     -> save in flights.csv
+    string dest;           //destination location   -> save in flights.csv
+    int duration;          //flight duration in mins -> save in flights.csv
+    string departureTime;  //time of departure -> saved in flights.cvs
+//  string bookingDate;
+    string sex;            //Taking user input(U)
+    string gmail;          //saving by getters in same process
+    int baggage;           //getting from user(U)
+    string mealPreference; // getting from user(U)
+    float cost;            // taking from flights.csv and adding additional bag                               gage cost and the addign
+
     };
 
     std::string getAirportID(int index) const;
@@ -64,6 +67,11 @@ public:
     string generateBookingID();
 
 
+
+    bool userBook(Database::Booking* booking);
+
+
+
 private:
     vector<Airport> airports;
     vector<Flight> flights;
@@ -71,7 +79,7 @@ private:
     string airportsFile;
     string flightFile;
     string bookingsFile;       
-    int bookingCounter;     //to generate unique booking ID;
+    int bookingCounter = 700;     //to generate unique booking ID;
 
 };
       

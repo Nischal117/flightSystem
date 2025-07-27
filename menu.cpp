@@ -58,6 +58,14 @@ int Menu::display() {
 
 
 
+
+
+
+
+
+
+/*
+
 std::string Menu::inputField(int fieldIndex, const std::string& initial) {
     std::string input = initial;
   //  curs_set(1); // Show cursor for input
@@ -92,10 +100,14 @@ std::string Menu::inputField(int fieldIndex, const std::string& initial) {
             input.pop_back(); // Delete last character
         } else if (inC >= 32 && inC <= 126) { // Printable characters
             if(fieldIndex == 3 && (inC == 'M' || inC == 'F')) {
-            input +=
-
-            }
             input += static_cast<char>(inC);
+            }
+            else {
+            input += static_cast<char>(inC);
+            }
         }
     }
 }
+
+
+*/

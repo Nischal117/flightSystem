@@ -20,7 +20,7 @@ int main() {
     string loggedAdmin;
     string loggedGmail;
     vector<string> menu_option = {"SIGN UP", "LOG IN", "ADMIN PANEL", "EXIT"};
-    vector<string> airLine = {"Delta", "British", "American", "Lufthansa", "LockHeed.PVT"};
+ //   vector<string> airLine = {"Delta", "British", "American", "Lufthansa", "LockHeed.PVT"};
 
     // Initialize ncurses
     initscr();
@@ -87,31 +87,34 @@ int main() {
                // Book a Flight: Airport selection (placeholder)
                // Assume airports.csv exists with format: AirportID,Name
                 loggedGmail = activateLog.getUserGmail();
-            clear();
-            refresh();
-                WINDOW* msg_win = newwin(10 , 50 , (getmaxy(stdscr))-10 / 2 , (getmaxx(stdscr)) - 50 / 2 );
-                wmove(msg_win , 2 , 2);
-                wprintw(msg_win , "%s" , loggedGmail.c_str());
-                wrefresh(msg_win);
-                getch();
-                delwin(msg_win);
+  //          clear();
+  //          refresh();
+     
+
 
   vector<string> userPanel = {"Book a Flight" , "See Your Flight" , "Delete bookings"};
     Menu userMind(userPanel , 12 , 50);
     int getuser = userMind.display();
+
+        
+        
 
         if(getuser == -1)
         {
             break;
         }
 
-        else if(getuser == 0)  {
 
+
+
+          else if(getuser == 0)  {
+
+                
 
 
   //***              Database db;
   //***              db.loadAirports();
-                Menu originMenu(db.getAirportNames(), 12, 50);
+                Menu originMenu(db.getAirportNames(), 20, 50);
                 int originChoice = originMenu.display();
                 if (originChoice == -1) {
                 break; // Cancel
@@ -120,7 +123,7 @@ int main() {
                         // Exclude selected origin from destination list
                       vector<string> destinations = db.getAirportNames();
                       destinations.erase(destinations.begin() + originChoice);
-                        Menu destMenu(destinations, 12, 50);
+                        Menu destMenu(destinations, 20, 50);
                         int destChoice = destMenu.display();
                         if (destChoice == -1) {
                             break; // Cancel
@@ -144,7 +147,7 @@ string airportDestination = db.getAirName(destChoice);
 //    db.loadFlights();     
    
 
-
+/* // helped debuging
 
     WINDOW* msg_win = newwin(10 , 50 , (getmaxy(stdscr)-10) / 2,(getmaxx(stdscr) - 50) / 2 );
     wmove(msg_win , 2, 2);
@@ -152,7 +155,7 @@ string airportDestination = db.getAirName(destChoice);
     wrefresh(msg_win);
     getch();
     delwin(msg_win);
-
+*/
 
 /*
 
@@ -210,6 +213,7 @@ for (size_t i = 0; i < foundFlight.size(); ++i) {
     bookNow.flightId =  foundFlight[flightIndex].flightId;
     bookNow.airline = foundFlight[flightIndex].airline; // e.g., "Delta"
     bookNow.flightDate = foundFlight[flightIndex].date;
+    bookNow.duration = foundFlight[flightIndex].duration;
     bookNow.origin = airportOrigin; // e.g., "JFK"
     bookNow.dest = airportDestination; // e.g., "LAX"
     bookNow.departureTime  = foundFlight[flightIndex].departureTime;
@@ -229,8 +233,7 @@ for (size_t i = 0; i < foundFlight.size(); ++i) {
     
     db.saveBooking(bookNow); 
     
-    Menu successMenu({"Booking successful! Press Enter to continue."}, 12, 50);
-    
+    Menu successMenu({"Booking successful! Press Enter to continue."}, 12, 50); 
     successMenu.display();
     } 
 else 
@@ -246,20 +249,27 @@ else
 
 
   
+         }
+
+    else if(getuser == 1)
+         {  
+            
+
+        
+
+
+
+
+
+            continue;
           }
 
-          else if(getuser == 1)
-          {
+    else if(getuser == 2)
+            {
             continue;
           }
-          else if(getuser == 2)
-          {
-            continue;
-          }
-        else 
-        {
-            break;
-        }
+
+        //      break;
 
 
 }

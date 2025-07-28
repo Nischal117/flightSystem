@@ -20,7 +20,11 @@ using std::vector;
     
     private: 
     string gmail;
+
+    public:
     string idFlight;
+
+
 
 
     }

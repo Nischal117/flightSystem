@@ -10,6 +10,7 @@
 #include<vector>
 #include<string>
 #include<ncurses.h>
+#include<cmath>
 
 
 using std::string;
@@ -35,6 +36,7 @@ public:
     string airline;
     string origin;
     string dest;
+    string date;
     string departureTime;
     int duration;
     float price;
@@ -51,6 +53,7 @@ public:
     int duration;          //flight duration in mins -> save in flights.csv
     string departureTime;  //time of departure -> saved in flights.cvs
 //  string bookingDate;
+    string flightDate;
     string sex;            //Taking user input(U)
     string gmail;          //saving by getters in same process
     int baggage;           //getting from user(U)
@@ -60,6 +63,7 @@ public:
     };
 
     std::string getAirportID(int index) const;
+    std::string getAirName(int index) const;
     void loadAirports();
     void loadFlights();
     vector<std::string> getAirportNames() const;

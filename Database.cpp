@@ -17,10 +17,9 @@ Database::Database() noexcept {
     {
 std::ofstream file(bookingsFile, std::ios::app);
     if (file.is_open()) {
-        file << booking.bookingId << "," << booking.name << "," << booking.sex << ","
-             << booking.flightId << "," << booking.airline << "," << booking.origin << ","
-             << booking.dest << "," << booking.departureTime << "," << booking.baggage << ","
-             << booking.mealPreference << "," << booking.cost << "\n";
+        file << booking.bookingId << "," << booking.name << "," << booking.sex << "," << booking.mealPreference << "," << booking.origin << "," << booking.dest << "," << booking.flightDate << "," << booking.departureTime << "," << booking.duration << "," << booking.baggage << "," << booking.cost << "," << booking.flightId << "," << booking.gmail << "\n";
+
+
         file.close();
     }
 
@@ -29,13 +28,50 @@ std::ofstream file(bookingsFile, std::ios::app);
 
 
 
+
+
+
 // generate booking Id
     string Database::generateBookingID() {
     
-    string bookId = "SSN" + std::to_string(bookingCounter);
+  //  string bookId = "SSN" + std::to_string(bookingCounter);
+   
+    string bookId;
+    string testNum;
+    string id;
+    int num;
+    std::ifstream file(bookingsFile);
     
-    bookingCounter++;
-    return bookId;
+    string line;
+    while(getline(file , line))
+    {
+        std::stringstream ss(line);
+        
+        string discard;
+        getline(ss , id , ',');
+
+        for(int i = 0 ; i < 11 ; i++)   {
+            
+            getline(ss , discard , ',');
+        }
+        getline(ss , discard);
+            
+    }
+
+    for(int i = 3 ; i < 6 ; i++)
+    {
+        testNum += id[i];
+    }
+
+    num = std::stoi(testNum);
+    num++;
+
+    bookId = "SSN" + std::to_string(num);
+
+ //   string bookId = "SSN" + id;
+    file.close();  
+
+     return bookId;
 
     }
 
@@ -181,19 +217,21 @@ void Database::loadFlights()
 
     string discardLine;
     getline(takeFly,discardLine);
- 
+
+    flights.clear();
+
     string line;
     while(getline(takeFly , line))
     {
     //    string line;
      std::stringstream temp(line);
-     string fly_id , airline , ori , des , leaveTime , duration , cost;
+     string fly_id , airline , ori , des , leaveTime , duration , cost , date;
 
-     if(getline(temp , fly_id , ',') && getline(temp , airline , ',') && getline(temp , ori , ',') && getline(temp , des , ',') && getline(temp , leaveTime , ',') && getline(temp , duration , ',') && getline(temp , cost))
+     if(getline(temp , fly_id , ',') && getline(temp , airline , ',') && getline(temp , ori , ',') && getline(temp , des , ',') && getline(temp , date , ',') && getline(temp , leaveTime , ',') && getline(temp , duration , ',') && getline(temp , cost))
      {
         int dur =  std::stoi(duration);
-        float price = std::stod(cost);
-        flights.push_back(Database::Flight{fly_id , airline , ori , des , leaveTime , dur , price});
+        float price = std::round(std::stof(cost)*100)/100;
+        flights.push_back(Database::Flight{fly_id , airline , ori , des ,date, leaveTime , dur , price});
 
 
 
@@ -201,6 +239,17 @@ void Database::loadFlights()
 
     }
 
+/*  // helped debugging 
+
+            WINDOW* win_msg = newwin(12 , 50 , (getmaxy(stdscr) - 12)/ 2, (getmaxx(stdscr) - 50) / 2);
+       for(int i = 0 ; i < flights.size() ; i++)  {
+           wmove(win_msg , 2*i , i);
+       wprintw(win_msg , "%s"  , flights[i].flightId.c_str());
+        }
+        wrefresh(win_msg);
+        getch();
+        delwin(win_msg);
+*/
         takeFly.close();
 
 
@@ -246,7 +295,15 @@ string Database::getAirportID(int index) const {
 
     else
         return airports[index].id;
+}
 
+string Database::getAirName(int index) const {
+    if(index < 0 || index > airports.size())
+    {
+    return "";
+    }
+    else 
+        return airports[index].name;
 
 }
 
@@ -268,9 +325,23 @@ vector<Database::Flight> Database::getFlights(const std::string& origin , const 
 
 
         }
-        return foundFlight;
+ //       clear();
+ //       refresh();
+ /*  // helped debugging
+        WINDOW* win_msg = newwin(12 , 50 , (getmaxy(stdscr) - 12)/ 2, (getmaxx(stdscr) - 50) / 2);
+       for(int i = 0 ; i < foundFlight.size() ; i++)  {
+           wmove(win_msg , 2*i , i);
+       wprintw(win_msg , "%s"  , foundFlight[i].flightId.c_str());
+        }
+        wrefresh(win_msg);
+        getch();
+        delwin(win_msg);
+
+        */
+    return foundFlight;
 
     }
+   
 
 
 

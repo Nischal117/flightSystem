@@ -1,1 +1,5 @@
-SSN700,Angeline,F,LH101,Lufthansa,America INT Airport,Nepal INT Airport,10:40,3,Veg,975
+BookingId,Name,Sex,MealPreference,Departure Airport,Arriving Airport,Date,Time,Duration,Baggage,Cost,FlightId,Gmail 
+SSN700,Logitech,F,Veg,America INT Airport,Germany INT Airport,2026-06-19,9:20,-1242100528,5,1025,AA100,nischalkarki001@gmail.com
+SSN701,Simon,M,Non-Veg,America INT Airport,Germany INT Airport,2025-12-10,10:40,-1144890160,3,975,LH101,simon@gmail.com
+SSN702,Messiah,M,Veg,America INT Airport,Germany INT Airport,2025-12-10,10:40,-1152062256,3,975,LH101,nischalkarki001@gmail.com
+SSN703,Ronaldo,M,Non-Veg,Russia INT Airport,British INT Airport,2025-11-25,15:40,-1246675760,5,615,BA101,sishir@gmail.com

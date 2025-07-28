@@ -62,6 +62,11 @@ bool logIn::isAuthenticated(){
         {
          userData[gMail] = passWord;
          userData[uName] = passWord;
+         if (uName == tempId || gMail == tempId) {
+                // Store the gmail when a match is found
+                gmail = gMail;
+            }
+
         }
 
     }
@@ -70,6 +75,7 @@ bool logIn::isAuthenticated(){
     auto it1 = userData.find(tempId);
     if(it1 != userData.end() && it1->second == password)
     {
+
       return true;
     }
 

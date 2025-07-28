@@ -4,6 +4,7 @@
 #include <vector>
 #include <ncurses.h>
 #include <fstream>
+#include <iomanip>
 
 #include "signUp.h"
 #include "logIn.h"
@@ -17,6 +18,7 @@ using namespace std;
 int main() {
     string loggedUser;
     string loggedAdmin;
+    string loggedGmail;
     vector<string> menu_option = {"SIGN UP", "LOG IN", "ADMIN PANEL", "EXIT"};
     vector<string> airLine = {"Delta", "British", "American", "Lufthansa", "LockHeed.PVT"};
 
@@ -77,13 +79,22 @@ int main() {
                     const vector<string> logInOptions = {"Username/Gmail: ", "Password: ", "Submit", "Cancel"};
                     bool hasUserAccess = activateLog.showLogIn(logInOptions);
                     loggedUser = activateLog.getUserId();
-                    string gmailForBookingFlight = activateLog.getUserGmail();
+               //     string gmailForBookingFlight = activateLog.getUserGmail();
                     clear();
                     refresh();
 
                if (hasUserAccess) {
                // Book a Flight: Airport selection (placeholder)
                // Assume airports.csv exists with format: AirportID,Name
+                loggedGmail = activateLog.getUserGmail();
+            clear();
+            refresh();
+                WINDOW* msg_win = newwin(10 , 50 , (getmaxy(stdscr))-10 / 2 , (getmaxx(stdscr)) - 50 / 2 );
+                wmove(msg_win , 2 , 2);
+                wprintw(msg_win , "%s" , loggedGmail.c_str());
+                wrefresh(msg_win);
+                getch();
+                delwin(msg_win);
 
   vector<string> userPanel = {"Book a Flight" , "See Your Flight" , "Delete bookings"};
     Menu userMind(userPanel , 12 , 50);
@@ -122,8 +133,12 @@ int main() {
 
     
 string origin = db.getAirportID(originChoice);
+string airportOrigin = db.getAirName(originChoice);
 int destIndex = destChoice < originChoice ? destChoice : destChoice + 1;
 string dest = db.getAirportID(destIndex);
+string airportDestination = db.getAirName(destChoice);
+
+
 
         
 //    db.loadFlights();     
@@ -172,14 +187,19 @@ string dest = db.getAirportID(destIndex);
     vector<string> flightOptions;
 
 for (size_t i = 0; i < foundFlight.size(); ++i) {
-    flightOptions.push_back(foundFlight[i].flightId + " - " + foundFlight[i].airline + " - " + foundFlight[i].departureTime  + " - $" + std::to_string(foundFlight[i].price));
+    
+    ostringstream cut;
+    cut << std::fixed << std::setprecision(2) << foundFlight[i].price;
+
+    flightOptions.push_back(foundFlight[i].flightId + " - " + foundFlight[i].airline + " - " + foundFlight[i].date + " - " + foundFlight[i].departureTime  + " - $" + cut.str());
 }
 
 
     
 
-       Menu flightMenu(flightOptions , 12 , 50);
+       Menu flightMenu(flightOptions , 12 , 50); 
        int flightIndex = flightMenu.display();
+
        if(flightIndex == -1)
        {
         break;
@@ -189,8 +209,9 @@ for (size_t i = 0; i < foundFlight.size(); ++i) {
     Database::Booking bookNow;
     bookNow.flightId =  foundFlight[flightIndex].flightId;
     bookNow.airline = foundFlight[flightIndex].airline; // e.g., "Delta"
-    bookNow.origin = origin; // e.g., "JFK"
-    bookNow.dest = dest; // e.g., "LAX"
+    bookNow.flightDate = foundFlight[flightIndex].date;
+    bookNow.origin = airportOrigin; // e.g., "JFK"
+    bookNow.dest = airportDestination; // e.g., "LAX"
     bookNow.departureTime  = foundFlight[flightIndex].departureTime;
 
     if (db.userBook(&bookNow))
@@ -203,6 +224,7 @@ for (size_t i = 0; i < foundFlight.size(); ++i) {
         totalBaggageCost = bookNow.baggage * 25;
     }
 
+    bookNow.gmail = loggedGmail;
     bookNow.cost = (foundFlight[flightIndex].price) + totalBaggageCost;
     
     db.saveBooking(bookNow); 

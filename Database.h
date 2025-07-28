@@ -25,8 +25,9 @@ public:
     Database() noexcept;
 
     struct Airport {
-    string name;
     string id;
+    string name;
+//    string id;
     };
 
     struct Flight {

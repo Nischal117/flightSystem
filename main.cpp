@@ -126,18 +126,20 @@ int destIndex = destChoice < originChoice ? destChoice : destChoice + 1;
 string dest = db.getAirportID(destIndex);
 
         
- //***   db.loadFlights();     
+//    db.loadFlights();     
+   
 
 
-/*
+
     WINDOW* msg_win = newwin(10 , 50 , (getmaxy(stdscr)-10) / 2,(getmaxx(stdscr) - 50) / 2 );
     wmove(msg_win , 2, 2);
     wprintw(msg_win ,  "%s %s " , origin.c_str() , dest.c_str());
     wrefresh(msg_win);
     getch();
     delwin(msg_win);
-*/
 
+
+/*
 
     string shortOrigin;
     string shortDest;
@@ -155,10 +157,10 @@ string dest = db.getAirportID(destIndex);
         shortDest+=tempLine[0];
     }
 
-    
+   */
 
 
-  vector<Database::Flight> foundFlight = db.getFlights(shortOrigin , shortDest);
+  vector<Database::Flight> foundFlight = db.getFlights(origin , dest );
     
     if(foundFlight.empty())
             {

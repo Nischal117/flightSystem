@@ -35,6 +35,12 @@ int main() {
     clear();
     refresh();
 
+    Database db;
+    db.loadAirports();
+ //   flights.clear();
+    db.loadFlights();
+
+
     while (true) {
         // Main menu using Menu class
         Menu mainMenu(menu_option, 12, 50);
@@ -92,8 +98,8 @@ int main() {
 
 
 
-                Database db;
-                db.loadAirports();
+  //***              Database db;
+  //***              db.loadAirports();
                 Menu originMenu(db.getAirportNames(), 12, 50);
                 int originChoice = originMenu.display();
                 if (originChoice == -1) {
@@ -120,7 +126,7 @@ int destIndex = destChoice < originChoice ? destChoice : destChoice + 1;
 string dest = db.getAirportID(destIndex);
 
         
-   db.loadFlights();     
+ //***   db.loadFlights();     
 
 
 /*
@@ -197,7 +203,7 @@ for (size_t i = 0; i < foundFlight.size(); ++i) {
 
     bookNow.cost = (foundFlight[flightIndex].price) + totalBaggageCost;
     
-    db.saveBooking(bookNow); // Assuming saveBooking is implemented
+    db.saveBooking(bookNow); 
     
     Menu successMenu({"Booking successful! Press Enter to continue."}, 12, 50);
     

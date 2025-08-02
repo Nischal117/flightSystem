@@ -28,6 +28,7 @@ public:
     struct Airport {
     string id;
     string name;
+    string location;
 //    string id;
     };
 
@@ -54,7 +55,7 @@ public:
     string departureTime;  //time of departure -> saved in flights.cvs
 //  string bookingDate;
     string flightDate;
-    string sex;            //Taking user input(U)
+//    string sex;            //Taking user input(U)
     string gmail;          //saving by getters in same process
     int baggage;           //getting from user(U)
     string mealPreference; // getting from user(U)
@@ -64,6 +65,7 @@ public:
 
     std::string getAirportID(int index) const;
     std::string getAirName(int index) const;
+    std::string getAirLocation(int index) const;
     void loadAirports();
     void loadFlights();
     vector<std::string> getAirportNames() const;

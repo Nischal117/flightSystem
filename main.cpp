@@ -10,6 +10,7 @@
 #include "logIn.h"
 #include "menu.h"
 #include "Database.h"
+#include "showBook.h"
 
 #define ACODE 117
 
@@ -114,7 +115,7 @@ int main() {
 
   //***              Database db;
   //***              db.loadAirports();
-                Menu originMenu(db.getAirportNames(), 20, 50);
+                Menu originMenu(db.getAirportNames(), 20, 70);
                 int originChoice = originMenu.display();
                 if (originChoice == -1) {
                 break; // Cancel
@@ -123,7 +124,7 @@ int main() {
                         // Exclude selected origin from destination list
                       vector<string> destinations = db.getAirportNames();
                       destinations.erase(destinations.begin() + originChoice);
-                        Menu destMenu(destinations, 20, 50);
+                        Menu destMenu(destinations, 20, 70);
                         int destChoice = destMenu.display();
                         if (destChoice == -1) {
                             break; // Cancel
@@ -139,7 +140,7 @@ string origin = db.getAirportID(originChoice);
 string airportOrigin = db.getAirName(originChoice);
 int destIndex = destChoice < originChoice ? destChoice : destChoice + 1;
 string dest = db.getAirportID(destIndex);
-string airportDestination = db.getAirName(destChoice);
+string airportDestination = db.getAirName(destChoice+1);
 
 
 
@@ -233,6 +234,9 @@ for (size_t i = 0; i < foundFlight.size(); ++i) {
     
     db.saveBooking(bookNow); 
     
+//    showFlight tempObj(loggedGmail);
+    showFlight::ticket(bookNow.bookingId); 
+
     Menu successMenu({"Booking successful! Press Enter to continue."}, 12, 50); 
     successMenu.display();
     } 
@@ -244,24 +248,17 @@ else
     }
     
 
-
-
-
-
   
          }
 
     else if(getuser == 1)
          {  
             
-
-        
-
-
+        string ticketId =  showFlight::displayUserFlight(loggedGmail); 
+        showFlight::ticket(ticketId); 
 
 
-
-            continue;
+     
           }
 
     else if(getuser == 2)

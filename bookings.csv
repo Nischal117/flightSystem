@@ -1,4 +1,3 @@
-BookingId,Name,Sex,MealPreference,Departure Airport,Arriving Airport,Date,Time,Duration,Baggage,Cost,FlightId,Gmail 
-SSN700,Logitech,F,Veg,America INT Airport,Germany INT Airport,2026-06-19,9:20,-1242100528,5,1025,AA100,nischalkarki001@gmail.com
-SSN702,Messiah,M,Veg,America INT Airport,Germany INT Airport,2025-12-10,10:40,-1152062256,3,975,LH101,nischalkarki001@gmail.com
-SSN704,Ael,F,Veg,Los Angeles International Airport,Charles de Gaulle Airport,2025-09-11,02:15,341,1,785.77,FL569,nischalkarki001@gmail.com
+BookingId,Name,MealPreference,Departure Airport,Arriving Airport,Date,Time,Duration,Baggage,Cost,FlightId,Airline,Gmail
+
+SSN700,srijal maharjan,Veg,Germany INT Airport,Sydney Kingsford Smith Airport,2025-11-30,21:00,400,2,703.37,FL600,American,srijal333@gmail.com

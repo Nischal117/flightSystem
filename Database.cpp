@@ -17,7 +17,8 @@ Database::Database() noexcept {
     {
 std::ofstream file(bookingsFile, std::ios::app);
     if (file.is_open()) {
-        file << booking.bookingId << "," << booking.name << "," << booking.sex << "," << booking.mealPreference << "," << booking.origin << "," << booking.dest << "," << booking.flightDate << "," << booking.departureTime << "," << booking.duration << "," << booking.baggage << "," << booking.cost << "," << booking.flightId << "," << booking.gmail << "\n";
+        file << booking.bookingId << "," << booking.name << "," << booking.mealPreference << "," << booking.origin << "," << booking.dest << "," << booking.flightDate << "," << booking.departureTime << "," << booking.duration << "," << booking.baggage << "," << booking.cost << "," << booking.flightId << "," << booking.airline << "," << booking.gmail << "\n";
+       
 
 
         file.close();
@@ -49,18 +50,23 @@ std::ofstream file(bookingsFile, std::ios::app);
         
         string discard;
         getline(ss , id , ',');
-
-        for(int i = 0 ; i < 11 ; i++)   {
+        
+        for(int i = 0 ; i < 10 ; i++)   {
             
             getline(ss , discard , ',');
         }
         getline(ss , discard);
             
     }
+    
+    if(id.empty()) id = "SSN699";
 
     for(int i = 3 ; i < 6 ; i++)
     {
         testNum += id[i];
+ /*       if(testNum.empty()) {
+        testNum = "699";
+        }*/
     }
 
     num = std::stoi(testNum);
@@ -82,10 +88,10 @@ std::ofstream file(bookingsFile, std::ios::app);
 
 bool Database::userBook(Database::Booking* booking) {
     // Initialize vector to store inputs for each field
-    std::vector<std::string> getInput(4, "");
+    std::vector<std::string> getInput(3, "");
     std::vector<std::string> labels = {
         "Enter Name: ",
-        "Enter Sex (M/F): ",
+  //     "Enter Sex (M/F): ",
         "Enter Baggage Number: ",
         "Enter Meal Preference (Veg/Non-Veg): "
     };
@@ -95,7 +101,7 @@ bool Database::userBook(Database::Booking* booking) {
     int maxX = getmaxx(stdscr);
 
     // Process each field sequentially
-    for (int i = 0; i < 4; ++i) {
+    for (int i = 0; i < 3; ++i) {
         bool validInput = false;
         while (!validInput) {
             // Create a new window for the current field
@@ -129,12 +135,17 @@ bool Database::userBook(Database::Booking* booking) {
                         isValid = false;
                         errorMsg = "Name cannot be empty";
                     }
-                } else if (i == 1) { // Sex
+                }
+
+         /*       else if (i == 1) { // Sex
                     if (getInput[i].empty() || (getInput[i] != "M" && getInput[i] != "F")) {
                         isValid = false;
                         errorMsg = "Sex must be M or F";
                     }
-                } else if (i == 2) { // Baggage
+                }
+*/
+
+                else if (i == 1) { // Baggage
                     bool allDigits = !getInput[i].empty();
                     for (char c : getInput[i]) {
                         if (c < '0' || c > '9') {
@@ -146,7 +157,7 @@ bool Database::userBook(Database::Booking* booking) {
                         isValid = false;
                         errorMsg = "Baggage number must be a number";
                     }
-                } else if (i == 3) { // Meal Preference
+                } else if (i == 2) { // Meal Preference
                     if (getInput[i].empty() || (getInput[i] != "Veg" && getInput[i] != "Non-Veg")) {
                         isValid = false;
                         errorMsg = "Meal preference must be Veg or Non-Veg";
@@ -176,12 +187,12 @@ bool Database::userBook(Database::Booking* booking) {
 
     // Store validated inputs in the Booking struct
     booking->name = getInput[0];
-    booking->sex = getInput[1];
+ //   booking->sex = getInput[1];
     booking->baggage = 0;
-    for (char c : getInput[2]) {
+    for (char c : getInput[1]) {
         booking->baggage = booking->baggage * 10 + (c - '0');
     }
-    booking->mealPreference = getInput[3];
+    booking->mealPreference = getInput[2];
 
     // Hide cursor and clean up
     curs_set(0);
@@ -272,10 +283,10 @@ void Database::loadAirports() {
     string line;
     while(getline(file , line)) {
         std::stringstream ss(line);
-        string id , name;
-        if(getline(ss , id , ',') && getline(ss , name , ',')) {
+        string id , name , location;
+        if(getline(ss , id , ',') && getline(ss , name , ',') && getline(ss , location) ) {
              
-             airports.push_back({id , name});
+             airports.push_back({id , name , location});
 
         }
 
@@ -304,9 +315,17 @@ string Database::getAirName(int index) const {
     }
     else 
         return airports[index].name;
-
 }
 
+string Database::getAirLocation(int index) const {
+    if(index < 0 || index > airports.size())
+    {
+    return "";
+    }
+    else 
+        return airports[index].location;
+
+}
 
 
 
@@ -352,7 +371,7 @@ vector<string> result;
     for(size_t i = 0 ; i < airports.size(); ++i)
     {
   //   if(i == 0) continue;
-     string name = airports[i].name + " - "  + airports[i].id;
+     string name = airports[i].name + " - "  + airports[i].id + " - " + airports[i].location;
      result.push_back(name);
     }
     

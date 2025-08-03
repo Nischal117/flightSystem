@@ -47,9 +47,10 @@ public:
     ~Menu();
 
     // Displays menu and returns selected option index (or -1 for cancel)
+    int strictDisplay();
     int display();
 
-    // Displays menu with a text input field at given index, returns input string
+    // Displays menu with a text input field at given index, returns input string no need..
     std::string inputField(int fieldIndex, const std::string& initial = "");
 };
 

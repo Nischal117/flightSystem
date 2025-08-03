@@ -16,6 +16,36 @@ Menu::~Menu() {
     }
 }
 
+
+
+// strictly for display purpose only
+
+int Menu::strictDisplay() {
+wclear(win);
+int maxY , maxX;
+getmaxyx(win , maxY , maxX);
+
+int startY = (maxY - options.size()) / 2;
+for(size_t i = 0 ; i < options.size(); ++i) {
+int startX = (maxX - options[i].length()) / 2;
+wmove(win , startY + i , startX);
+wprintw(win , "%s" , options[i].c_str());
+}
+wrefresh(win);
+
+if(wgetch(win) == 27)
+    {
+        return -1;
+
+    }
+
+    return 0;
+}
+
+
+
+
+
 void Menu::displayMenu() {
     wclear(win);
     int maxY, maxX;

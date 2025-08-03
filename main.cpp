@@ -34,7 +34,8 @@ int main() {
     clear();
     refresh();
     Menu welcome({"WELCOME TO THE FLIGHT RESERVATION", "Press any key to get started"}, 5, 50);
-    welcome.display();
+  welcome.strictDisplay();
+ //   welcome.display();
     clear();
     refresh();
 
@@ -62,12 +63,14 @@ int main() {
                     clear();
                     refresh();
                     Menu status({"Sign Up Successful.", "Press any key to continue"}, 5, 30);
-                    status.display();
+               status.strictDisplay();
+  //           status.display();
                 } else {
                     clear();
                     refresh();
                     Menu status({"Sign Up was Unsuccessful.", "Press any key to continue"}, 5, 30);
-                    status.display();
+                    status.strictDisplay();
+ //                 status.display();
                 }
                 break;
             }
@@ -183,7 +186,8 @@ string airportDestination = db.getAirName(destChoice);
     if(foundFlight.empty())
             {
     Menu errorMenu({"No flights available. Press Enter to continue."}, 12, 50);
-    errorMenu.display(); // Wait for user acknowledgment
+  errorMenu.strictDisplay();
+//  errorMenu.display(); // Wait for user acknowledgment
     break; // Restart loop in main.cpp
             }
     
@@ -237,13 +241,16 @@ for (size_t i = 0; i < foundFlight.size(); ++i) {
     showFlight::ticket(bookNow.bookingId); 
 
     Menu successMenu({"Booking successful! Press Enter to continue."}, 12, 50); 
-    successMenu.display();
+  successMenu.strictDisplay();
+//  successMenu.display();
     goto backToUserPanel;
     } 
 else 
     {
     Menu cancelMenu({"Booking cancelled. Press Enter to continue."}, 12, 50);
-    cancelMenu.display();
+
+       cancelMenu.strictDisplay();
+    // cancelMenu.display();
     goto backToUserPanel;
     // continue;
     }
@@ -260,6 +267,7 @@ else
         
         ticketId =  showFlight::displayUserFlight(loggedGmail); 
         showFlight::ticket(ticketId); 
+
         goto backToUserPanel;
 
      
@@ -298,22 +306,25 @@ else
 
                 if (hasAdminAccess) {
                     Menu status({"Admin Log In Successful.", "Press any key to continue"}, 5, 50);
-                    status.display();
+                    status.strictDisplay();
+
+           //         status.display();
                 } else {
                     Menu status({"Admin Log In Unsuccessful.", "Press any key to continue"}, 5, 50);
-                    status.display();
+                    status.strictDisplay();
+           //         status.display();
                 }
                 break;
             }
 
             case 3: // EXIT
                 endwin();
-                cout << loggedUser << endl;
+      //          cout << loggedUser << endl;
                 return 0;
         }
     }
 
     endwin();
-    cout << loggedUser << endl;
+ //   cout << loggedUser << endl;
     return 0;
 }

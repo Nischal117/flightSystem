@@ -55,10 +55,10 @@ using std::vector;
     };
 
     
-
+  
   static  string displayUserFlight(const string& gmail);
   static void ticket(const string& bookId);
-   
+  static void removeFlight(const string& deleteId);
 
 
 };

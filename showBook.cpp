@@ -1,6 +1,42 @@
 #include "showBook.h"
 
 
+void showFlight::removeFlight(const string& deleteId)
+    {
+   string filename = "bookings.csv";
+   string tempfilename = "temp.csv";
+
+    std::ifstream file(filename);
+    std::ofstream temp(tempfilename);
+
+    
+
+    string line;
+      if (std::getline(file, line)) {
+        temp << line << "\n";
+    }
+
+
+while(getline(file , line))  {
+        std::stringstream ss(line);
+        string bookId;
+        getline(ss , bookId , ',');
+
+        if(bookId != deleteId)  {
+          temp << line << "\n";
+
+          }
+        }
+
+        file.close();
+        temp.close();
+      
+      std::remove(filename.c_str());
+    std::rename(tempfilename.c_str(), filename.c_str());
+
+    }
+
+
 
 
 void showFlight::ticket(const string& bookId) 

@@ -98,7 +98,7 @@ int main() {
 
     backToUserPanel:
 
-  vector<string> userPanel = {"Book a Flight" , "See Your Flight" , "Delete bookings"};
+  vector<string> userPanel = {"Book a Flight" , "See Your Flight" , "Delete bookings" , "Exit"};
     Menu userMind(userPanel , 12 , 50);
     int getuser = userMind.display();
 
@@ -275,8 +275,17 @@ else
 
     else if(getuser == 2)
             {
-            continue;
-          }
+                string deleteId;
+                
+                deleteId = showFlight::displayUserFlight(loggedGmail);
+                showFlight::removeFlight(deleteId);
+                goto backToUserPanel;
+
+                }
+    else if(getuser == 3)
+    {
+        continue;
+    }
 
         //      break;
 

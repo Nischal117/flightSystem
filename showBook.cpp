@@ -1,4 +1,3 @@
-
 #include "showBook.h"
 
 
@@ -67,23 +66,23 @@ string bookingId , name , flightId , airline , origin , destination , departureD
 
   if(findFlight == true)
   {
-    WINDOW* t_win = newwin(14 , 66 , (getmaxy(stdscr)-14)/2 , (getmaxx(stdscr)-66) / 2);
+    WINDOW* t_win = newwin(14 , 70 , (getmaxy(stdscr)-14)/2 , (getmaxx(stdscr)-70) / 2);
     box(t_win , 0 , 0);
     wmove(t_win , 1 ,(66 - (t.airline).length()) / 2);
-    wprintw(t_win , "%s", (t.airline).c_str());
+    wprintw(t_win , "%s Airlines", (t.airline).c_str());
     wmove(t_win , 3 , 2);
     wprintw(t_win , "ID : %s" , (t.bookingId).c_str());
     wmove(t_win , 5 , 2);
     wprintw(t_win , "Name : %s" , (t.name).c_str());
-    wmove(t_win , 5 , 48);
+    wmove(t_win , 5 , 52);
     wprintw(t_win , "Date : %s" , (t.departureDate).c_str());
-    wmove(t_win , 6 , 48);
+    wmove(t_win , 6 , 52);
     wprintw(t_win , "Time : %s" , (t.departureTime).c_str());
     wmove(t_win , 7 , 2);
     wprintw(t_win , "Meal : %s" , (t.mealPreference).c_str());
-    wmove(t_win , 7 , 48);
+    wmove(t_win , 7 , 52);
     wprintw(t_win , "Duration : %d" , t.duration);
-    wmove(t_win , 8 , 48);
+    wmove(t_win , 8 , 52);
     wprintw(t_win , "Baggage : %d" , t.baggage);
     wmove(t_win , 9 , 2);
     wprintw(t_win , "Departure : %s" , (t.origin).c_str());
@@ -91,7 +90,7 @@ string bookingId , name , flightId , airline , origin , destination , departureD
     wprintw(t_win , "Destination : %s" , (t.destination).c_str());
     wmove(t_win , 12 , 2);
     wprintw(t_win , "FlightID : %s" , (t.flightId).c_str());
-    wmove(t_win , 12 , 48);
+    wmove(t_win , 12 , 52);
     wprintw(t_win , "Cost : $%.2f" , t.cost );
   
     wrefresh(t_win);

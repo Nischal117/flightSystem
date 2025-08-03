@@ -46,7 +46,8 @@ int main() {
 
     while (true) {
         // Main menu using Menu class
-        Menu mainMenu(menu_option, 12, 50);
+        Menu mainMenu(menu_option , getmaxy(stdscr) , getmaxx(stdscr));    
+ //     Menu mainMenu(menu_option, 12, 50);
         int choice = mainMenu.display();
 
         if (choice == -1) { // Escape pressed
@@ -92,6 +93,7 @@ int main() {
   //          refresh();
      
 
+    backToUserPanel:
 
   vector<string> userPanel = {"Book a Flight" , "See Your Flight" , "Delete bookings"};
     Menu userMind(userPanel , 12 , 50);
@@ -110,7 +112,7 @@ int main() {
 
           else if(getuser == 0)  {
 
-                
+            
 
 
   //***              Database db;
@@ -140,10 +142,7 @@ string origin = db.getAirportID(originChoice);
 string airportOrigin = db.getAirName(originChoice);
 int destIndex = destChoice < originChoice ? destChoice : destChoice + 1;
 string dest = db.getAirportID(destIndex);
-string airportDestination = db.getAirName(destChoice+1);
-
-
-
+string airportDestination = db.getAirName(destChoice);
         
 //    db.loadFlights();     
    
@@ -185,7 +184,7 @@ string airportDestination = db.getAirName(destChoice+1);
             {
     Menu errorMenu({"No flights available. Press Enter to continue."}, 12, 50);
     errorMenu.display(); // Wait for user acknowledgment
-    continue; // Restart loop in main.cpp
+    break; // Restart loop in main.cpp
             }
     
     vector<string> flightOptions;
@@ -239,12 +238,14 @@ for (size_t i = 0; i < foundFlight.size(); ++i) {
 
     Menu successMenu({"Booking successful! Press Enter to continue."}, 12, 50); 
     successMenu.display();
+    goto backToUserPanel;
     } 
 else 
     {
     Menu cancelMenu({"Booking cancelled. Press Enter to continue."}, 12, 50);
     cancelMenu.display();
-    continue;
+    goto backToUserPanel;
+    // continue;
     }
     
 
@@ -253,10 +254,13 @@ else
 
     else if(getuser == 1)
          {  
-            
-        string ticketId =  showFlight::displayUserFlight(loggedGmail); 
+        
+        string ticketId;
+        ticketId.clear();
+        
+        ticketId =  showFlight::displayUserFlight(loggedGmail); 
         showFlight::ticket(ticketId); 
-
+        goto backToUserPanel;
 
      
           }

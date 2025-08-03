@@ -49,6 +49,7 @@ int Menu::display() {
                 highlight = (highlight + 1) % options.size();
                 break;
             case 10: // Enter key
+
                 return highlight; // Return selected option index
             case 27: // Escape key
                 return -1; // Cancel

@@ -39,7 +39,9 @@ private:
 
 public:
     // Constructor: Initializes window and options
-    Menu(const std::vector<std::string>& opts, int h = 12, int w = 50);
+    Menu(const std::vector<std::string>& opts,int h = getmaxy(stdscr) ,int w = getmaxx(stdscr));
+
+ // Menu(const std::vector<std::string>& opts, int h = 12, int w = 50);
     
     // Destructor: Cleans up ncurses window
     ~Menu();

@@ -1,3 +1,8 @@
 BookingId,Name,MealPreference,Departure Airport,Arriving Airport,Date,Time,Duration,Baggage,Cost,FlightId,Airline,Gmail
 
-SSN700,srijal maharjan,Veg,Germany INT Airport,Sydney Kingsford Smith Airport,2025-11-30,21:00,400,2,703.37,FL600,American,srijal333@gmail.com
+SSN700,Sugam,Veg,London Heathrow Airport,Charles de Gaulle Airport,2025-08-14,20:30,281,0,514.14,FL554,American,sugam666@gmail.com
+SSN701,srijal,Veg,San Francisco International Airport,Sydney Kingsford Smith Airport,2025-11-14,23:00,203,0,841.38,FL566,United,srijal333@gmail.com
+SSN702,Nischal,Non-Veg,Germany INT Airport,Charles de Gaulle Airport,2025-11-30,21:00,400,1,653.37,FL600,American,sugam666@gmail.com
+SSN703,saugat,Veg,Leonardo da Vinci International Airport,Leonardo da Vinci International Airport,2025-09-17,19:45,292,2,881.71,FL577,Delta,srijal333@gmail.com
+SSN704,Logitec,Veg,America INT Airport,Los Angeles International Airport,2025-10-09,20:00,185,0,603.35,FL508,American,srijal333@gmail.com
+SSN705,Milton,Veg,Nepal INT Airport,John F. Kennedy International Airport,2025-09-25,15:00,244,1,932.48,FL602,Lufthansa,sugam666@gmail.com
